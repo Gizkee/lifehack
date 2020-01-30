@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TestApp</string>
+    <string name="phoneIsEmpty">Телефон не указан</string>
+    <string name="webSiteIsEmpty">Сайт не указан</string>
+    <string name="descriptionIsEmpty">Описание отсутствует</string>
+    <string name="base_url">http://megakohz.bget.ru/test_task/</string>
+</resources>
