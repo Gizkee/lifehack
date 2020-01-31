@@ -156,6 +156,9 @@ class CompanyDetailsActivity : AppCompatActivity() {
     }
 
     private fun showErrorMessage(message: String) {
+        collapsingToolbarLayout.title = ""
+        content.visibility = View.INVISIBLE
+        progressBar.visibility = View.GONE
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }

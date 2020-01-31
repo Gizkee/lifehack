@@ -1,6 +1,7 @@
 package ru.lifehackstudio.testapp.data
 
 import com.google.gson.GsonBuilder
+import com.google.gson.stream.MalformedJsonException
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.lifehackstudio.testapp.data.Result.Failure
@@ -37,12 +38,16 @@ class CompaniesRepositoryImpl :
     }
 
     override suspend fun getCompanyDetails(id: Int): Result<CompanyDetails> {
-        val response = service.getCompanyDetails(id).execute()
-        return if (response.isSuccessful && response.body() != null) {
-            Success(response.body()!![0])
-        } else {
-            Failure(Exception(response.errorBody().toString()))
+        var result: Result<CompanyDetails>? = null
+        try {
+            val response = service.getCompanyDetails(id).execute()
+            if (response.isSuccessful && response.body() != null) {
+                result = Success(response.body()!![0])
+            }
+        } catch (e: MalformedJsonException) {
+            result = Failure(Exception("Ошибка загрузки данных о магазине"))
         }
+        return result!!
     }
 
 }
